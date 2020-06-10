@@ -1,0 +1,10 @@
+{% extends 'todo/sitetemplate.html' %}
+{% block content %}
+
+<ul>
+{% for todo in todos %}
+    <li><a href="{% url 'viewtodo' todo.id %}">{{ todo.title }}</a> - {{ todo.memo }} - {{ todo.dt_created }}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

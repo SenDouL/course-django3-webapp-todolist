@@ -1,0 +1,32 @@
+{% extends 'todo/sitetemplate.html' %}
+{% block content %}
+
+{% if requestResult %}
+    {% if requestResult == 'ERROR' %}
+        <h2 style="color: red;">{{ requestResult }} - {{ requestResultMessage }}</h2>
+    {% elif requestResult == 'WARNING' %}
+        <h2 style="color: yellow;">{{ requestResult }} - {{ requestResultMessage }}</h2>
+    {% endif %}
+{% endif %}
+
+<h1 class="text-center mt-5" id="blogdetailtitle">{{ todo.title }}</h1>
+
+<h5 class="text-center text-muted mb-5">{{ todo.dt_created|date:'d F Y - H:i' }}</h5>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ todoForm.as_p }}
+    <input type="submit" value="Save" />
+</form>
+
+<form method="POST" action="{% url 'completetodo' todo.id %}">
+    {% csrf_token %}
+    <input type="submit" value="Completed" />
+</form>
+
+<form method="POST" action="{% url 'deletetodo' todo.id %}">
+    {% csrf_token %}
+    <input type="submit" value="Delete" />
+</form>
+
+{% endblock %}

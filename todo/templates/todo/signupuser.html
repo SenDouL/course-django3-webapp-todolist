@@ -1,0 +1,20 @@
+{% extends 'todo/sitetemplate.html' %}
+{% block content %}
+
+<h1>SignUp</h1>
+
+{% if requestResult %}
+    {% if requestResult == 'ERROR' %}
+        <h2 style="color: red;">{{ requestResult }} - {{ requestResultMessage }}</h2>
+    {% elif requestResult == 'WARNING' %}
+        <h2 style="color: yellow;">{{ requestResult }} - {{ requestResultMessage }}</h2>
+    {% endif %}
+{% endif %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {{ createUserForm.as_p }}
+    <input type="submit" value="Signup" />
+</form>
+
+{% endblock %}

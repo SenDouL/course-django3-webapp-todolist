@@ -1,0 +1,2 @@
+Django User: sadmin
+Django Pass: !!11QQqq
