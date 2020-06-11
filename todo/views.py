@@ -22,9 +22,9 @@ def signupuser(request):
                 return redirect('todos')
 
             except IntegrityError:
-                return render(request, 'todo/signupuser.html', { 'createUserForm': UserCreationForm(), 'requestResult': 'ERROR', 'requestResultCode': 'USER_ALREADY_EXIST', 'requestResultMessage': 'O utilizador já existe.' })
+                return render(request, 'todo/signupuser.html', { 'createUserForm': UserCreationForm(), 'requestResult': 'ERROR', 'requestResultCode': 'USER_ALREADY_EXIST', 'requestResultMessage': 'User already exists.' })
         else:
-            return render(request, 'todo/signupuser.html', { 'createUserForm': UserCreationForm(), 'requestResult': 'ERROR', 'requestResultCode': 'PASSWORDS_DONT_MATCH', 'requestResultMessage': 'As passwords não são iguais.' })
+            return render(request, 'todo/signupuser.html', { 'createUserForm': UserCreationForm(), 'requestResult': 'ERROR', 'requestResultCode': 'PASSWORDS_DONT_MATCH', 'requestResultMessage': 'The passwords dont match.' })
 
 def loginuser(request):
     if request.method == 'GET':
@@ -35,7 +35,7 @@ def loginuser(request):
         userObj = authenticate(request, username=request.POST['username'], password=request.POST['password'])
 
         if userObj is None:
-            return render(request, 'todo/loginuser.html', { 'authUserForm': AuthenticationForm(), 'requestResult': 'ERROR', 'requestResultCode': 'USER_PASSWORD_MISMATCH', 'requestResultMessage': 'O utilizador ou a password estão incorrectos.' })
+            return render(request, 'todo/loginuser.html', { 'authUserForm': AuthenticationForm(), 'requestResult': 'ERROR', 'requestResultCode': 'USER_PASSWORD_MISMATCH', 'requestResultMessage': 'User and password are invalid.' })
         else:
             login(request, userObj)
             return redirect('todos')
@@ -72,7 +72,7 @@ def createtodo(request):
             todoObj.save()
             return redirect('todos')
         except ValueError:
-            return render(request, 'todo/createtodo.html', { 'createTodoForm': ToDoForm(), 'requestResult': 'ERROR', 'requestResultCode': 'INVALID_DATA', 'requestResultMessage': 'A informação enviada é inválida.' })
+            return render(request, 'todo/createtodo.html', { 'createTodoForm': ToDoForm(), 'requestResult': 'ERROR', 'requestResultCode': 'INVALID_DATA', 'requestResultMessage': 'The form data sent is invalid.' })
 
 @login_required
 def viewtodo(request, todo_pk):
@@ -87,7 +87,7 @@ def viewtodo(request, todo_pk):
             formObj.save()
             return redirect('todos')
         except ValueError:
-            return render(request, 'todo/viewtodo.html', { 'todo': todoObj, 'todoForm': formObj, 'requestResult': 'ERROR', 'requestResultCode': 'INVALID_DATA', 'requestResultMessage': 'A informação enviada é inválida.' })
+            return render(request, 'todo/viewtodo.html', { 'todo': todoObj, 'todoForm': formObj, 'requestResult': 'ERROR', 'requestResultCode': 'INVALID_DATA', 'requestResultMessage': 'The form data sent is invalid.' })
 
 @login_required
 def completetodo(request, todo_pk):
