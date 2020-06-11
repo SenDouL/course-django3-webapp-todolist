@@ -1,20 +1,49 @@
 {% extends 'todo/sitetemplate.html' %}
 {% block content %}
 
-<h1>SignUp</h1>
+<div class="text-center">
+    <div class="row">
+        <div class="col-12">
+        {% if requestResult %}
+            {% if requestResult == 'ERROR' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {% elif requestResult == 'WARNING' %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {% elif requestResult == 'INFO' %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {% else %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {% endif %}
 
-{% if requestResult %}
-    {% if requestResult == 'ERROR' %}
-        <h2 style="color: red;">{{ requestResult }} - {{ requestResultMessage }}</h2>
-    {% elif requestResult == 'WARNING' %}
-        <h2 style="color: yellow;">{{ requestResult }} - {{ requestResultMessage }}</h2>
-    {% endif %}
-{% endif %}
-
-<form method="POST" action="">
-    {% csrf_token %}
-    {{ createUserForm.as_p }}
-    <input type="submit" value="Signup" />
-</form>
+                {{ requestResultMessage }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-12">
+            <h1>SignUp</h1>
+            <br><br>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-5">
+            <form method="POST" action="">
+                {% csrf_token %}
+                {% for field in createUserForm %}
+                <p>
+                    {{ field.label_tag }}
+                    {{ field }}
+                </p>
+                {% endfor %}
+                <button class="btn btn-info btn-lg btn-block" type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

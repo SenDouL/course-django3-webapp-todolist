@@ -1,2 +1,5 @@
-Django User: sadmin
-Django Pass: !!11QQqq
+SuperUser: sadmin
+Pass: !!11QQqq
+
+User: mike
+Pass: 111111

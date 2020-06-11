@@ -1,6 +1,8 @@
 {% extends 'todo/sitetemplate.html' %}
 {% block content %}
+{% load static %}
 
-HOME
+<div class="text-center"><img src="{% static 'logo.png' %}" /></div>
+<h1 class="text-center">Welcome to your ToDo list webpage. A place where you can create and see your tasks everyday at anywhere.</h1>
 
 {% endblock %}

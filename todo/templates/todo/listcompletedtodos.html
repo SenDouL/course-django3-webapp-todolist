@@ -1,10 +1,28 @@
 {% extends 'todo/sitetemplate.html' %}
 {% block content %}
 
-<ul>
-{% for todo in todos %}
-    <li><a href="{% url 'viewtodo' todo.id %}">{{ todo.title }}</a> - {{ todo.memo }} - {{ todo.dt_created }} - {{ todo.dt_completed }}</li>
-{% endfor %}
-</ul>
+<div class="row">
+    <div class="col-12 text-center">
+        <br><br>
+        <h1>My Completed ToDos</h1>
+        <br><br>
+    </div>
+    <div class="col-12">
+    {% for todo in todos %}
+        {% if todo.priority.id == 1 %}
+        <div class="alert alert-secondary show" role="alert">
+        {% elif todo.priority.id == 2 %}
+        <div class="alert alert-primary show" role="alert">
+        {% elif todo.priority.id == 3 %}
+        <div class="alert alert-warning show" role="alert">
+        {% elif todo.priority.id == 4 %}
+        <div class="alert alert-danger show" role="alert">
+        {% endif %}
+
+        {{ todo.title }} - Completed at: {{ todo.dt_completed|date:'d F Y - H:i' }}
+        </div>
+    {% endfor %}
+    </div>
+</div>
 
 {% endblock %}

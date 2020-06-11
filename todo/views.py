@@ -52,7 +52,7 @@ def home(request):
 @login_required
 def todos(request):
     todoObj = ToDo.objects.filter(user=request.user, dt_completed__isnull=True).order_by('dt_created')
-    return render(request, 'todo/listtodos.html', { 'todos': todoObj })
+    return render(request, 'todo/listtodos.html', { 'todos': todoObj, 'todoCount': todoObj.count })
 
 @login_required
 def completedtodos(request):
